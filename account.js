@@ -1,97 +1,97 @@
 class bankAccount {
-	constructor(agency, number, type) {
-		this.agency = agency;
-		this.number = number;
-		this.type = type;
-		this._balance = 0;
+    constructor(agency, number, type) {
+        this.agency = agency;
+        this.number = number;
+        this.type = type;
+        this._balance = 0;
         this._investments = 0;
-	}
-    validateBalance(value){
+    }
+    validateBalance(value) {
         if (value > this._balance) {
-			console.log('Withdrawal denied; Insufficient funds!');
+            console.log('Withdrawal denied; Insufficient funds!');
             return false;
-		}
+        }
         return true;
     }
 
-	withdraw(value) {
-        if(!this.validateBalance) return;
+    withdraw(value) {
+        if (!this.validateBalance) return;
         this._balance = this._balance - value;
         return this._balance;
-        
-	}
 
-	deposit(value) {
-		this._balance = this._balance + value;
-		return this._balance;
     }
-    
-    invest(value){
-        if(!this.validateBalance) return;
+
+    deposit(value) {
+        this._balance = this._balance + value;
+        return this._balance;
+    }
+
+    invest(value) {
+        if (!this.validateBalance) return;
         this._investments = this._investments + value;
         this._balance = this._balance - value;
-		return this._investments;
+        return this._investments;
     }
 
-    redeem(value){
+    redeem(value) {
         if (value > this._investments) {
-			return console.log('Withdrawal denied; Insufficient funds!');
-		}
-		this._investments = this._investments - value;
+            return console.log('Withdrawal denied; Insufficient funds!');
+        }
+        this._investments = this._investments - value;
         this._balance = this._balance + value;
-		return this._investments;
+        return this._investments;
     }
-    set balance(value){
+    set balance(value) {
         this._balance = value;
     }
 
-    get balance(){
+    get balance() {
         return this._balance;
     }
 
 }
 
 class checkingAccount extends bankAccount {
-	constructor(agency, number, creditCard) {
-		super(agency, number);
-		this.type = 'checking';
-		this._creditCard = creditCard;
-	}
+    constructor(agency, number, creditCard) {
+        super(agency, number);
+        this.type = 'checking';
+        this._creditCard = creditCard;
+    }
 
-	set creditCard(value) {
-		this._creditCard = value;
-	}
+    set creditCard(value) {
+        this._creditCard = value;
+    }
 
-	get creditCard() {
-		return this._creditCard;
-	}
+    get creditCard() {
+        return this._creditCard;
+    }
 }
 
 class savingsAccount extends bankAccount {
-	constructor(agency, number) {
-		super(agency, number);
-		this.type = 'savings';
-	}
+    constructor(agency, number) {
+        super(agency, number);
+        this.type = 'savings';
+    }
 }
 
 class universityAccount extends bankAccount {
-	constructor(agency, number) {
-		super(agency, number);
-		this.type = 'universit';
-	}
+    constructor(agency, number) {
+        super(agency, number);
+        this.type = 'universit';
+    }
 
-	withdraw(value) {
-		if (value > 500) {
-			return 'Operation denied.';
-		}
+    withdraw(value) {
+        if (value > 500) {
+            return 'Operation denied.';
+        }
 
-		this.balance = this.balance - value;
-		return this.balance;
-	}
+        this.balance = this.balance - value;
+        return this.balance;
+    }
 }
 
 const myAcount = new checkingAccount(1, 1, true);
-const myUniversityAccount = new universityAccount(1,2);
+const myUniversityAccount = new universityAccount(1, 2);
 console.log(myAcount);
 myAcount.deposit(1000);
 console.log(myAcount);
